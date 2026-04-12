@@ -3,6 +3,12 @@ const ytdl = require("ytdl-core");
 
 const app = express();
 
+// الصفحة الرئيسية
+app.get("/", (req, res) => {
+  res.send("Server is running ✅");
+});
+
+// التحميل
 app.get("/download", (req, res) => {
     const url = req.query.url;
 
@@ -12,7 +18,7 @@ app.get("/download", (req, res) => {
 
     res.header("Content-Disposition", 'attachment; filename="video.mp4"');
 
-    ytdl(url, { format: "mp4" }).pipe(res);
+    ytdl(url).pipe(res);
 });
 
 app.listen(10000, () => {
